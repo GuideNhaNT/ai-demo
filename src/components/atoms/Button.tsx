@@ -12,12 +12,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   padding?: string;
   margin?: string;
   fullWidth?: boolean;
+  fontSize?: string;
+  fontWeight?: number | string;
+  letterSpacing?: string;
+  textCase?: 'uppercase' | 'lowercase' | 'capitalize' | 'none';
+  width?: string;
 }
 
 const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
   border: 1px solid transparent;
-  font-weight: bold;
+  font-weight: ${(props) => props.fontWeight || 'bold'};
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +37,10 @@ const StyledButton = styled.button<ButtonProps>`
   border-radius: ${(props) => props.borderRadius || '4px'};
   padding: ${(props) => props.padding || '10px 20px'};
   margin: ${(props) => props.margin || '0'};
-  width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
+  width: ${(props) => props.width || (props.fullWidth ? '100%' : 'auto')};
+  font-size: ${(props) => props.fontSize || 'inherit'};
+  letter-spacing: ${(props) => props.letterSpacing || 'normal'};
+  text-transform: ${(props) => props.textCase || 'none'};
 
   &:hover {
     opacity: 0.9;
